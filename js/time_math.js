@@ -4,9 +4,16 @@
 function hourMinToHourFormated (hours, minutes) {
     var paddingHour = hours < 10 ?  '0' : '';
     var paddingMin = minutes < 10 ?  '0' : '';
-    return paddingHour + hours + 
-           ':' + 
+    return paddingHour + hours +
+           ':' +
            paddingMin + minutes;
+}
+
+/**
+ * Determines if a time string holds a negative value
+ */
+function isNegative(str) {
+    return str[0] === '-';
 }
 
 /**
@@ -15,7 +22,7 @@ function hourMinToHourFormated (hours, minutes) {
  */
 function hourToMinutes(time) {
     var st = time.split(':');
-    var isNeg = st[0] == '-';
+    var isNeg = isNegative(st);
     st[0] = isNeg ? st[0].substr(1) : st[0];
 
     var min = Number(st[1]) + (Number(st[0]) * 60);
@@ -77,9 +84,11 @@ function validateTime(time) {
 
 module.exports = {
     hourMinToHourFormated,
+    isNegative,
     multiplyTime,
     minutesToHourFormated,
     subtractTime,
     sumTime,
-    validateTime
+    validateTime,
+    hourToMinutes
 };
